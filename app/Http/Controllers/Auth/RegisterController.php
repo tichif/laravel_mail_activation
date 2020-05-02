@@ -94,6 +94,6 @@ class RegisterController extends Controller
         Mail::to($user)->queue(new ActivationEmail($code));
 
         // redirect the user
-        return redirect('/login');
+        return redirect('/login')->with('toast_success', 'We sent you and email for activate your account.');
     }
 }

@@ -13,6 +13,7 @@ class ActivationEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $code;
+    public $url;
 
     /**
      * Create a new message instance.
@@ -22,6 +23,7 @@ class ActivationEmail extends Mailable
     public function __construct(ActivationCode $code)
     {
         $this->code = $code;
+        $this->url = route('user.activate', $this->code);
     }
 
     /**

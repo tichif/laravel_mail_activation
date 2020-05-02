@@ -1,1 +1,1 @@
-<p>Hi, click on this link for active your account <a href="{{ route('user.activate',$code) }}">{{ route('user.activate',$code) }}</a></p>
+<p>Hi, click on this link for active your account <a href="{{ $url }}">{{ $url }}</a></p>

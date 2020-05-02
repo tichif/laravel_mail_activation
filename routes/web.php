@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/activation/{code}', 'ActivationController@activation');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

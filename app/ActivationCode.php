@@ -16,7 +16,7 @@ class ActivationCode extends Model
     }
 
     // Laravel ap utilise colonne code la pito au lio de id a pou li retourne informations yo
-    public function getKeyName()
+    public function getRouteKeyName()
     {
         return 'code';
     }

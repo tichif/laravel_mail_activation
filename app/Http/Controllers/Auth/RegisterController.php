@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Mail\ActivationEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -81,7 +83,7 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         // create code for user
-        $user->userActivationCode()->create([
+        $code = $user->userActivationCode()->create([
             'code' => str_random(128)
         ]);
 
@@ -89,6 +91,7 @@ class RegisterController extends Controller
         $this->guard()->logout();
 
         // mail the user
+        Mail::to($user)->send(new ActivationEmail($code));
 
         // redirect the user
         return redirect('/login');

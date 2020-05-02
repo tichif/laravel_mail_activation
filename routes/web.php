@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/activation/{code}', 'ActivationController@activation');
+Route::get('/activation/{code}', 'ActivationController@activation')->name('user.activate');
 
 Auth::routes();
 

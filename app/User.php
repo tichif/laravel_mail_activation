@@ -42,7 +42,7 @@ class User extends Authenticatable
         return $this->hasOne(ActivationCode::class);
     }
 
-    public function getUserIsActivatedAttribute()
+    public function getIsActivatedAttribute()
     {
         if ($this->active) {
             return true;

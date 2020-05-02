@@ -91,7 +91,7 @@ class RegisterController extends Controller
         $this->guard()->logout();
 
         // mail the user
-        Mail::to($user)->send(new ActivationEmail($code));
+        Mail::to($user)->queue(new ActivationEmail($code));
 
         // redirect the user
         return redirect('/login');

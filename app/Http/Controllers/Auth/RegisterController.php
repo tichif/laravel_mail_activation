@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\ActivationCodeEvent;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Mail\ActivationEmail;
@@ -91,7 +92,7 @@ class RegisterController extends Controller
         $this->guard()->logout();
 
         // mail the user
-        Mail::to($user)->queue(new ActivationEmail($code));
+        event(new ActivationCodeEvent($user));
 
         // redirect the user
         return redirect('/login')->with('toast_success', 'We sent you and email for activate your account.');

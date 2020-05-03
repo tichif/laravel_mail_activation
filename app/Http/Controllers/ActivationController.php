@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ActivationCode;
+use App\Events\ActivationCodeEvent;
 use App\Mail\ActivationEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,7 @@ class ActivationController extends Controller
             return redirect('/home')->with('toast_success', 'Welcome ' . $user->name);
         }
 
-        Mail::to($user)->queue(new ActivationEmail($user->userActivationCode));
+        event(new ActivationCodeEvent($user));
 
         return redirect('/login')->with('toast_success', 'An email has been sent to your account');
     }
